@@ -36,12 +36,23 @@ $hotel_info = array_keys($hotels[0]);
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
+            <?php foreach ($hotels as $hotel) : ?>
+                <tr>
+                    <?php foreach ($hotel as $data => $info) : ?>
+
+                        <?php if (($data === 'parking') && ($info === true)) : ?>
+                            <td>Yes</td>
+
+                        <?php elseif (($data === 'parking') && ($info === false)) : ?>
+                            <td>No</td>
+
+                        <?php else : ?>
+                            <td><?= $info ?></td>
+                        <?php endif ?>
+
+                    <?php endforeach ?>
+                </tr>
+            <? endforeach ?>
         </tbody>
     </table>
 </body>
