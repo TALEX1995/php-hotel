@@ -4,6 +4,9 @@ include 'data/data.php';
 
 $hotel_data = array_keys($hotels[0]);
 
+$want_parking = $_GET['parking'] ?? '';
+
+$search_hotel_vote = $_GET['hotel-vote'] ?? '';
 
 
 ?>
@@ -26,14 +29,14 @@ $hotel_data = array_keys($hotels[0]);
     <div class="container">
 
 
-        <form action="index.php" class="my-5" method="GET">
+        <form action="" class="my-5" method="GET">
             <!-- Parking -->
             <label for="parking">Parcheggio</label>
             <input id="parking" type="checkbox" name="parking" value="true">
 
             <!-- Hotel vote -->
             <select class="form-select my-3" aria-label="Default select example" name="hotel-vote">
-                <option selected>Cerca l'hotel in base al voto</option>
+                <option selected value="">Cerca l'hotel in base al voto</option>
                 <option value="1">Uno</option>
                 <option value="2">Due</option>
                 <option value="3">Tre</option>
@@ -41,8 +44,10 @@ $hotel_data = array_keys($hotels[0]);
                 <option value="5">Cinque</option>
             </select>
 
-
-            <button type="submit">Filtra</button>
+            <div class="d-flex justify-content-between">
+                <button type="submit">Filtra</button>
+                <a href="index.php">Annulla filtri</a>
+            </div>
         </form>
 
 
@@ -56,21 +61,24 @@ $hotel_data = array_keys($hotels[0]);
             </thead>
             <tbody>
                 <?php foreach ($hotels as $hotel) : ?>
-                    <tr>
-                        <?php foreach ($hotel as $data => $info) : ?>
 
-                            <?php if (($data === 'parking') && ($info === true)) : ?>
-                                <td>Yes</td>
+                    <?php if ((($want_parking == $hotel['parking']) || ($want_parking === '')) && (($search_hotel_vote == $hotel['vote']) || ($search_hotel_vote === ''))) : ?>
+                        <tr>
+                            <?php foreach ($hotel as $data => $info) : ?>
 
-                            <?php elseif (($data === 'parking') && ($info === false)) : ?>
-                                <td>No</td>
+                                <?php if (($data === 'parking') && ($info === true)) : ?>
+                                    <td>Yes</td>
 
-                            <?php else : ?>
-                                <td><?= $info ?></td>
-                            <?php endif ?>
+                                <?php elseif (($data === 'parking') && ($info === false)) : ?>
+                                    <td>No</td>
 
-                        <?php endforeach ?>
-                    </tr>
+                                <?php else : ?>
+                                    <td><?= $info ?></td>
+                                <?php endif ?>
+
+                            <?php endforeach ?>
+                        </tr>
+                    <?php endif ?>
                 <? endforeach ?>
             </tbody>
         </table>
