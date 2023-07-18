@@ -2,7 +2,7 @@
 
 include 'data/data.php';
 
-
+$hotel_info = array_keys($hotels[0]);
 
 ?>
 
@@ -18,13 +18,32 @@ include 'data/data.php';
 </head>
 
 <body>
-    <?php foreach ($hotels as $hotel) : ?>
+    <!-- <?php foreach ($hotels as $hotel) : ?>
         <ul>
             <?php foreach ($hotel as $info => $data) : ?>
                 <li><strong><?= $info ?></strong> : <?= $data ?></li>
             <?php endforeach ?>
         </ul>
-    <?php endforeach ?>
+    <?php endforeach ?> -->
+
+    <!-- Table with Hotels -->
+    <table class="table">
+        <thead>
+            <tr>
+                <?php foreach ($hotel_info as $info) : ?>
+                    <th scope="col"><?= str_replace('_', ' ', ucfirst($info)) ?></th>
+                <?php endforeach ?>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 
 </html>
