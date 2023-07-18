@@ -18,7 +18,13 @@ include 'data/data.php';
 </head>
 
 <body>
-
+    <?php foreach ($hotels as $hotel) : ?>
+        <ul>
+            <?php foreach ($hotel as $info => $data) : ?>
+                <li><strong><?= $info ?></strong> : <?= $data ?></li>
+            <?php endforeach ?>
+        </ul>
+    <?php endforeach ?>
 </body>
 
 </html>
