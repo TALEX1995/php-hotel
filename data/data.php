@@ -38,4 +38,5 @@ $hotels = [
         'distance_to_center' => 50
     ],
 
+
 ];
